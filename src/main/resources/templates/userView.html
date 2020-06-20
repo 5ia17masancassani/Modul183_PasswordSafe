@@ -2,12 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UserView</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="webjars/bootstrap/4.4.1/css/bootstrap.min.css"
-          rel="stylesheet"></link>
+    <link href="StylesUserView.css" rel="stylesheet">
+    <title>Title</title>
 </head>
 <body>
-
+<div class="header">
+    <h1>Welcome to your Password Safe</h1>
+    <h3>in the list below you can add, edit or delete your records</h3>
+</div>
+<div class="main">
+    <table id="customers">
+        <tr>
+            <th>Website</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Remarks</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+            <td>Remark</td>
+            <td>
+                <button>edit</button>
+            </td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+            <td>Remark</td>
+            <td>
+                <button>edit</button>
+            </td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>80</td>
+            <td>Remark</td>
+            <td>
+                <button>edit</button>
+            </td>
+            <td>
+                <button>delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="footer">
+    <div class="addButton">
+        <button>add new record</button>
+    </div>
+</div>
 </body>
 </html>
