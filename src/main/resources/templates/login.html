@@ -9,16 +9,21 @@
 <body>
 
 <div>
-    <!--
-    <form action="#" th:action="@{/pokemon}" th:object="${pokemon}"
+
+    <form action="#" th:action="@{/login}" th:object="${user}"
           method="post">
-        <p id="test">
-            Enter Pokemon Name: <input class="input-group mb-3" id="centerInput" type="text"
-                                       th:field="*{name}" />
+        <p id="username">
+            Username: <input class="input-group mb-3" id="centerInput" type="text"
+                                       th:field="*{username}" />
         </p>
 
+        <p id="password">
+            Password: <input class="input-group mb-3" type="text"
+                                       th:field="*{password}" />
+        </p>
+        <button>Submit</button>
     </form>
-    -->
+    <p th:text="${error}"></p>
 </div>
 
 </body>
