@@ -21,12 +21,11 @@ public class MainController {
 
 	@PostMapping("/login")
 	public String view(Model model, @ModelAttribute User user) {
-		System.out.println(passwordService.encryptPassword(user.getPassword()));
-
 		if(user.getUsername().equals("Admin")){
 			String temp = user.getPassword();
 			user.setPassword(passwordService.encryptPassword(user.getPassword()));
-			if(user.getPassword().equals("lS3UmWz04o0xb7Zlf/QGuA==")){
+			if(user.getPassword().equals("dKjJUq85r3iDkOoxFlG2bg==")){
+				passwordService.decryptPassword(user.getPassword());
 				model.addAttribute("user", user);
 				return "userView";
 			} else{
