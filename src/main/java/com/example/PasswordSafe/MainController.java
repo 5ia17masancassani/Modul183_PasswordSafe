@@ -26,7 +26,7 @@ public class MainController {
 		if(user.getUsername().equals("Admin")){
 			String temp = user.getPassword();
 			user.setPassword(passwordService.encryptPassword(user.getPassword()));
-			if(user.getPassword().equals("dKjJUq85r3iDkOoxFlG2bg==")){
+			if(user.getPassword().equals("lS3UmWz04o0xb7Zlf/QGuA==")){
 				model.addAttribute("user", user);
 				return "userView";
 			} else{

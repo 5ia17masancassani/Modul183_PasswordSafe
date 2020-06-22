@@ -14,10 +14,10 @@ import java.util.Base64;
 @Service
 public class PasswordService {
 
-    public String encryptPassword(String password) {
-        String keyString = "SymmetricPw47111";
+    private final byte[] key = new byte[16];
 
-        byte[] key = keyString.getBytes();
+    public String encryptPassword(String password) {
+
         byte[] dataToSend = password.getBytes();
 
         Cipher c;
@@ -28,8 +28,6 @@ public class PasswordService {
             byte[] encryptedData = c.doFinal(dataToSend);
 
             String encodedString = Base64.getEncoder().encodeToString(encryptedData);
-
-            System.out.println(encodedString);
 
             return encodedString;
 
