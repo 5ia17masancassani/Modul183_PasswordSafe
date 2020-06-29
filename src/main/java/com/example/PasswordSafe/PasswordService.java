@@ -8,6 +8,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
@@ -15,77 +16,28 @@ import java.util.Base64;
 @Service
 public class PasswordService {
 
-    private final byte[] key = "SymmetricPw47111".getBytes();
+    private Key secretKeySpec = new SecretKeySpec( "pizza67890123456".getBytes(), "AES" );;
 
-    public String encryptPassword(String password) {
+    public String encryptString(String content) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
-        System.out.println("1: " + password);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+        byte[] encrypted = cipher.doFinal(content.getBytes());
 
-        byte[] dataToSend = password.getBytes();
+        String base64String = Base64.getEncoder().encodeToString(encrypted);
+        System.out.println(base64String);
 
-        System.out.println("2: " + dataToSend);
-        Cipher c;
-        try {
-            c = Cipher.getInstance("AES");
-            System.out.println(key);
-            SecretKeySpec k = new SecretKeySpec(key, "AES");
-            c.init(Cipher.ENCRYPT_MODE, k);
-            byte[] encryptedData = c.doFinal(dataToSend);
-
-            System.out.println("3: " + encryptedData);
-
-            String encodedString = Base64.getEncoder().encodeToString(encryptedData);
-
-            System.out.println("4: " + encodedString);
-
-            return encodedString;
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return base64String;
     }
 
-    public String decryptPassword(String password){
+    public String decryptString(String data)  throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
-        System.out.println("5: " + password);
-        byte[] decodedBytes = Base64.getDecoder().decode(password);
-        System.out.println("6: " + decodedBytes);
+        byte [] base64Bytes = Base64.getDecoder().decode(data);
 
-        Cipher c;
-        try {
-            c = Cipher.getInstance("AES");
-            System.out.println(key);
-            SecretKeySpec k =
-                    new SecretKeySpec(key, "AES");
-            c.init(Cipher.DECRYPT_MODE, k);
-            byte[] data = c.doFinal(decodedBytes);
-            System.out.println("8: " + data);
-            return data.toString();
-        } catch (NoSuchAlgorithmException e) {
-
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-
-            e.printStackTrace();
-        }
-        return "test";
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+        byte[] decrypted = cipher.doFinal(base64Bytes);
+        System.out.println(new String(decrypted));
+        return new String(decrypted);
     }
 }
