@@ -53,7 +53,7 @@ public class MainController {
 	}
 	@PostMapping("/addRecord")
 	public String view(Model model, @ModelAttribute Record record) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
-		record.setPassword(passwordService.encryptString(record.getPassword()));
+		record.setPassword(passwordService.encryptString(record.getNormalPassword()));
 		recordService.addRecord(record);
 		model.addAttribute("records", recordService.getRecords());
 		return "userView";

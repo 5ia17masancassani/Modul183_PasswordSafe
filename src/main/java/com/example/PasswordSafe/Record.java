@@ -1,6 +1,15 @@
 package com.example.PasswordSafe;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
 public class Record {
+
+    private PasswordService passwordService = new PasswordService();
+
     private  int id;
     private  String website;
     private  String username;
@@ -47,9 +56,11 @@ public class Record {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword() throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+        return passwordService.decryptString(password);
     }
+
+    public String getNormalPassword() { return password; }
 
     public void setPassword(String password) {
         this.password = password;
