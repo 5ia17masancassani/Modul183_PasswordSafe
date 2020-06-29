@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="StylesUserView.css" rel="stylesheet">
-    <title>Title</title>
+    <title>Password Safe</title>
 </head>
 <body>
 <div class="header">
@@ -19,11 +19,13 @@
             <th>Username</th>
             <th>Password</th>
             <th>Remarks</th>
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${records.empty}">
-            <td colspan="2"> No Records Available</td>
+            <td colspan="7"> No Records Available</td>
         </tr>
         <tr th:each="record : ${records}">
             <td><span th:text="${record.id}"> Id </span></td>
@@ -32,12 +34,14 @@
             <td><span th:text="${record.password}"> Password </span></td>
             <td><span th:text="${record.remark}"> Remark </span></td>
             <td><a th:href="@{/delete_user(record=${record.id})}" class="btn btn-danger">Delete</a></td>
+            <td><a th:href="@{/edit(record=${record.id})}" class="btn btn-danger">Edit</a></td>
         </tr>
         </tbody>
     </table>
 </div>
 <div class="footer">
     <div class="addButton">
+        <h1> Add new Record </h1>
         <form action="#" th:action="@{/addRecord}" th:object="${record}"
               method="post">
             <p id="website">
@@ -50,7 +54,7 @@
                                  th:field="*{username}"/>
             </p>
             <p id="password">
-                Password: <input class="input-group mb-3" type="text"  minlength="8" required
+                Password: <input class="input-group mb-3" type="password"  minlength="8" required
                                  th:field="*{password}"/>
             </p>
 

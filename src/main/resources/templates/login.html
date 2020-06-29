@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="webjars/bootstrap/4.4.1/css/bootstrap.min.css"
-          rel="stylesheet"></link>
+    <meta charset="UTF-8">
+    <link href="StylesLogin.css" rel="stylesheet">
 </head>
 <body>
 
-<div>
+<div class="login">
 
     <form action="#" th:action="@{/login}" th:object="${user}"
           method="post">

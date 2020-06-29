@@ -27,6 +27,31 @@ public class RecordService {
 
     }
 
+    public List<Record> editRecord(Record record){
+        for (Record r: this.getRecords()){
+            if(r.getId() == record.getId()){
+                r.setPassword(record.getNormalPassword());
+                r.setRemark(record.getRemark());
+                r.setUsername(record.getUsername());
+                r.setWebsite(record.getWebsite());
+            }
+        }
+        return records;
+    }
+
+    public Record getRecordById(int id) {
+        Record record = null;
+        for (Record r: this.getRecords()){
+            if(r.getId() == id){
+                record = r;
+            }
+        }
+        if(record != null){
+            return record;
+        }
+        return null;
+    }
+
     public List<Record> getRecords() {
         return records;
     }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Record</title>
+</head>
+<body>
+<div class="footer">
+    <div class="addButton">
+        <form action="#" th:action="@{/edit_record}" th:object="${record}"
+              method="post">
+            <p id="id">
+                ID: <input class="input-group mb-3" id="centerInput" type="text" required disabled
+                                th:field="*{id}"/>
+            </p>
+            <p id="website">
+                Website: <input class="input-group mb-3" type="text" required
+                                th:field="*{website}"/>
+            </p>
+
+            <p id="username">
+                Username: <input class="input-group mb-3" type="text" required
+                                 th:field="*{username}"/>
+            </p>
+            <p id="password">
+                Password: <input class="input-group mb-3" type="password"  minlength="8" required
+                                 th:field="*{password}"/>
+            </p>
+
+            <p id="remark">
+                Remark: <input class="input-group mb-3" type="text"
+                               th:field="*{remark}"/>
+            </p>
+            <button>Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

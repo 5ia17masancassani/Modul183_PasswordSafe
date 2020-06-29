@@ -69,5 +69,19 @@ public class MainController {
 		return "userView";
 	}
 
+	@PostMapping("/edit_record")
+	public String editRecord(Model model, @ModelAttribute Record record) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+		record.setPassword(passwordService.encryptString(record.getNormalPassword()));
+		model.addAttribute("record", new Record());
+		model.addAttribute("records", recordService.editRecord(record));
+		return "userView";
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String edit(@RequestParam(name="record") int id, Model model) {
+		model.addAttribute("record", recordService.getRecordById(id));
+		return "editRecord";
+	}
+
 
 }
