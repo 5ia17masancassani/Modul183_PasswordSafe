@@ -14,6 +14,7 @@
     <table id="customers">
         <thead>
         <tr>
+            <th>Id</th>
             <th>Website</th>
             <th>Username</th>
             <th>Password</th>
@@ -25,10 +26,12 @@
             <td colspan="2"> No Records Available</td>
         </tr>
         <tr th:each="record : ${records}">
+            <td><span th:text="${record.id}"> Id </span></td>
             <td><span th:text="${record.website}"> Website </span></td>
             <td><span th:text="${record.username}"> Username </span></td>
             <td><span th:text="${record.password}"> Password </span></td>
             <td><span th:text="${record.remark}"> Remark </span></td>
+            <td><a th:href="@{/delete_user(record=${record.id})}" class="btn btn-danger">Delete</a></td>
         </tr>
         </tbody>
     </table>
@@ -38,16 +41,16 @@
         <form action="#" th:action="@{/addRecord}" th:object="${record}"
               method="post">
             <p id="website">
-                Website: <input class="input-group mb-3" id="centerInput" type="text"
+                Website: <input class="input-group mb-3" id="centerInput" type="text" required
                                 th:field="*{website}"/>
             </p>
 
             <p id="username">
-                Username: <input class="input-group mb-3" type="text"
+                Username: <input class="input-group mb-3" type="text" required
                                  th:field="*{username}"/>
             </p>
             <p id="password">
-                Password: <input class="input-group mb-3" type="text"
+                Password: <input class="input-group mb-3" type="text"  minlength="8" required
                                  th:field="*{password}"/>
             </p>
 

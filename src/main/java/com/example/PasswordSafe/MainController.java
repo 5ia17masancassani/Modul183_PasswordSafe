@@ -3,9 +3,7 @@ package com.example.PasswordSafe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -21,6 +19,8 @@ public class MainController {
 
 	@Autowired
 	private PasswordService passwordService;
+
+	int counter = 0;
 
 	@GetMapping("/")
 	public String login(Model model) {
@@ -54,7 +54,17 @@ public class MainController {
 	@PostMapping("/addRecord")
 	public String view(Model model, @ModelAttribute Record record) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
 		record.setPassword(passwordService.encryptString(record.getNormalPassword()));
+		record.setId(counter);
 		recordService.addRecord(record);
+		counter++;
+		model.addAttribute("records", recordService.getRecords());
+		return "userView";
+	}
+
+	@RequestMapping(value = "/delete_user", method = RequestMethod.GET)
+	public String handleDeleteUser(@RequestParam(name="record")int id, Model model) {
+		recordService.removeRecord(id);
+		model.addAttribute("record", new Record());
 		model.addAttribute("records", recordService.getRecords());
 		return "userView";
 	}

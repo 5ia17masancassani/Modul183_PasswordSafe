@@ -13,12 +13,12 @@
     <form action="#" th:action="@{/login}" th:object="${user}"
           method="post">
         <p id="username">
-            Username: <input class="input-group mb-3" id="centerInput" type="text"
+            Username: <input class="input-group mb-3" id="centerInput" type="text" required
                                        th:field="*{username}" />
         </p>
 
         <p id="password">
-            Password: <input class="input-group mb-3" type="password"
+            Password: <input class="input-group mb-3" type="password" required
                                        th:field="*{password}" />
         </p>
         <button>Submit</button>

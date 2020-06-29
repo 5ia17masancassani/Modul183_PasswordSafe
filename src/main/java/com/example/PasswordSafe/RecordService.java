@@ -14,6 +14,19 @@ public class RecordService {
         records.add(record);
     }
 
+    public void removeRecord(int id) {
+        Record record = null;
+        for (Record r: this.getRecords()){
+            if(r.getId() == id){
+                record = r;
+            }
+        }
+        if(record != null){
+            records.remove(record);
+        }
+
+    }
+
     public List<Record> getRecords() {
         return records;
     }

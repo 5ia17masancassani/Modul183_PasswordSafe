@@ -25,7 +25,6 @@ public class PasswordService {
         byte[] encrypted = cipher.doFinal(content.getBytes());
 
         String base64String = Base64.getEncoder().encodeToString(encrypted);
-        System.out.println(base64String);
 
         return base64String;
     }
@@ -37,7 +36,6 @@ public class PasswordService {
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
         byte[] decrypted = cipher.doFinal(base64Bytes);
-        System.out.println(new String(decrypted));
         return new String(decrypted);
     }
 }
