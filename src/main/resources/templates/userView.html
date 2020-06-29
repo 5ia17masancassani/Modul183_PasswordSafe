@@ -12,55 +12,51 @@
 </div>
 <div class="main">
     <table id="customers">
+        <thead>
         <tr>
             <th>Website</th>
             <th>Username</th>
             <th>Password</th>
             <th>Remarks</th>
-            <th></th>
-            <th></th>
         </tr>
-        <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-            <td>Remark</td>
-            <td>
-                <button>edit</button>
-            </td>
-            <td>
-                <button>delete</button>
-            </td>
+        </thead>
+        <tbody>
+        <tr th:if="${records.empty}">
+            <td colspan="2"> No Records Available</td>
         </tr>
-        <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-            <td>Remark</td>
-            <td>
-                <button>edit</button>
-            </td>
-            <td>
-                <button>delete</button>
-            </td>
+        <tr th:each="record : ${records}">
+            <td><span th:text="${record.website}"> Website </span></td>
+            <td><span th:text="${record.username}"> Username </span></td>
+            <td><span th:text="${record.password}"> Password </span></td>
+            <td><span th:text="${record.remark}"> Remark </span></td>
         </tr>
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>80</td>
-            <td>Remark</td>
-            <td>
-                <button>edit</button>
-            </td>
-            <td>
-                <button>delete</button>
-            </td>
-        </tr>
+        </tbody>
     </table>
 </div>
 <div class="footer">
     <div class="addButton">
-        <button>add new record</button>
+        <form action="#" th:action="@{/addRecord}" th:object="${record}"
+              method="post">
+            <p id="website">
+                Website: <input class="input-group mb-3" id="centerInput" type="text"
+                                th:field="*{website}"/>
+            </p>
+
+            <p id="username">
+                Username: <input class="input-group mb-3" type="text"
+                                 th:field="*{username}"/>
+            </p>
+            <p id="password">
+                Password: <input class="input-group mb-3" type="text"
+                                 th:field="*{password}"/>
+            </p>
+
+            <p id="remark">
+                Remark: <input class="input-group mb-3" type="text"
+                               th:field="*{remark}"/>
+            </p>
+            <button>Submit</button>
+        </form>
     </div>
 </div>
 </body>

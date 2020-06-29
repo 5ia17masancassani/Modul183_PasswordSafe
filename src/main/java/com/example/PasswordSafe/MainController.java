@@ -16,6 +16,8 @@ import java.util.Base64;
 
 @Controller
 public class MainController {
+	@Autowired
+	private RecordService recordService;
 
 	@Autowired
 	private PasswordService passwordService;
@@ -34,6 +36,8 @@ public class MainController {
 			if(user.getPassword().equals("dnX3MkSqVapcPTPS+KDFrA==")){
 				passwordService.decryptString(user.getPassword());
 				model.addAttribute("user", user);
+				model.addAttribute("record", new Record());
+				model.addAttribute("records", recordService.getRecords());
 				return "userView";
 			} else{
 				user.setPassword(temp);
@@ -47,5 +51,13 @@ public class MainController {
 		}
 
 	}
+	@PostMapping("/addRecord")
+	public String view(Model model, @ModelAttribute Record record) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+		record.setPassword(passwordService.encryptString(record.getPassword()));
+		recordService.addRecord(record);
+		model.addAttribute("records", recordService.getRecords());
+		return "userView";
+	}
+
 
 }
